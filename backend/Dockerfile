@@ -2,14 +2,14 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Copy package files from backend subfolder
+COPY backend/package*.json ./
 
-# Install production dependencies
-RUN npm install --production
+# Install production dependencies  
+RUN npm install --omit=dev
 
-# Copy the rest of the application
-COPY . .
+# Copy the rest of the backend application
+COPY backend/ ./
 
 # Change ownership to node user
 RUN chown -R node:node /app
